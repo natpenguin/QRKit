@@ -10,31 +10,7 @@ import UIKit
 
 public struct QRCreator {
     
-    // MARK: - Enum define
-    
-    /// Correction level when generating QR code.
-    ///
-    /// - h: 30%
-    /// - q: 25%
-    /// - m: 15%
-    /// - l: 07%
-    public enum Correction: String {
-        case h = "H"
-        case q = "Q"
-        case m = "M"
-        case l = "L"
-    }
-    
-    /// Rendering environment.
-    ///
-    /// - software: Software rendering
-    /// - hardware: Hardware rendering
-    public enum Renderer {
-        case software
-        case hardware
-    }
-    
-    // MARK: - Interface
+    // MARK: - interface
     
     /// Create `UIImage` instance.
     public var image: UIImage? {
@@ -97,7 +73,7 @@ public struct QRCreator {
         self.data = data
     }
     
-    // MARK: - Private
+    // MARK: - private
     
     /// Data of QR code.
     private let data: Data
@@ -110,3 +86,34 @@ public struct QRCreator {
     private var renderer: Renderer = .software
     
 }
+
+// MARK: - define
+
+extension QRCreator {
+    
+    // MARK: - enum
+    
+    /// Correction level when generating QR code.
+    ///
+    /// - h: 30%
+    /// - q: 25%
+    /// - m: 15%
+    /// - l: 07%
+    public enum Correction: String {
+        case h = "H"
+        case q = "Q"
+        case m = "M"
+        case l = "L"
+    }
+    
+    /// Rendering environment.
+    ///
+    /// - software: Software rendering
+    /// - hardware: Hardware rendering
+    public enum Renderer {
+        case software
+        case hardware
+    }
+    
+}
+

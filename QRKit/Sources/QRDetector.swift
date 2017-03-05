@@ -10,25 +10,7 @@ import UIKit
 
 public struct QRDetector {
     
-    // MARK: - Enum define
-    
-    /// Reading accuracy.
-    ///
-    /// - high: High precision.
-    /// - low: Low precision.
-    public enum Accuracy {
-        case high
-        case low
-        
-        var rawValue: String {
-            switch self {
-            case .high: return CIDetectorAccuracyHigh
-            case .low: return CIDetectorAccuracyLow
-            }
-        }
-    }
-    
-    // MARK: - Interface
+    // MARK: - interface
     
     /// Create instance of `String` array.
     public var strings: [String]? {
@@ -57,12 +39,36 @@ public struct QRDetector {
         self.image = image
     }
     
-    // MARK: - Private
+    // MARK: - private
     
     /// Image of QR code.
     private let image: CIImage
     
     /// Reading accuracy.
     private var accuracy: Accuracy = .high
+    
+}
+
+// MARK: - define
+
+extension QRDetector {
+    
+    // MARK: - enum
+    
+    /// Reading accuracy.
+    ///
+    /// - high: High precision.
+    /// - low: Low precision.
+    public enum Accuracy {
+        case high
+        case low
+        
+        var rawValue: String {
+            switch self {
+            case .high: return CIDetectorAccuracyHigh
+            case .low: return CIDetectorAccuracyLow
+            }
+        }
+    }
     
 }
