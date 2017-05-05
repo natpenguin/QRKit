@@ -15,17 +15,17 @@ extension UIImageView {
     /// - Parameters:
     ///   - qr: The `QRCreator` instance you want to load.
     ///   - handler: Completion handler. (Returns true if it succeeds, false if it fails.)
-    public func load(of qr: QRCreator, completion handler: ((Bool) -> Void)?) {
+    public func set(of code: String, completion handler: ((Bool) -> Void)?) {
         DispatchQueue.global(qos: .default).async {
-            guard let qrImage = qr.image else {
+            if let image = code.qrcreator?.image {
+                DispatchQueue.main.async { [weak self] in
+                    self?.image = image
+                    handler?(true)
+                }
+            } else {
                 DispatchQueue.main.async {
                     handler?(false)
                 }
-                return
-            }
-            DispatchQueue.main.async { [weak self] in
-                self?.image = qrImage
-                handler?(true)
             }
         }
     }
