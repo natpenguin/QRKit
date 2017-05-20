@@ -16,9 +16,9 @@ public struct QRContainer<T> {
         self.raw = raw
     }
     
-    // MARK: - private
+    // MARK: - fileprivate
     
-    let raw: T
+    fileprivate let raw: T
     
 }
 
@@ -26,6 +26,15 @@ extension QRContainer where T: QRCreateable {
     
     public var creator: QRCreateContext? {
         guard let data = raw.data else { return nil }
+        return QRCreateContext(raw: data)
+    }
+    
+}
+
+extension QRContainer where T == String {
+    
+    public var creator: QRCreateContext? {
+        guard let data = raw.data(using: .utf8) else { return nil }
         return QRCreateContext(raw: data)
     }
     
