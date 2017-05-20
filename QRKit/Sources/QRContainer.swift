@@ -22,15 +22,6 @@ public struct QRContainer<T> {
     
 }
 
-extension QRContainer where T: QRCreateable {
-    
-    public var creator: QRCreateContext? {
-        guard let data = raw.data else { return nil }
-        return QRCreateContext(raw: data)
-    }
-    
-}
-
 extension QRContainer where T == String {
     
     public var creator: QRCreateContext? {
@@ -40,11 +31,18 @@ extension QRContainer where T == String {
     
 }
 
-extension QRContainer where T: QRDetectable {
+extension QRContainer where T == Data {
+    
+    public var creator: QRCreateContext? {
+        return QRCreateContext(raw: raw)
+    }
+    
+}
+
+extension QRContainer where T == UIImage {
     
     public var detector: QRDetectContext? {
-        guard let image = raw.image else { return nil }
-        return QRDetectContext(raw: image)
+        return QRDetectContext(raw: raw)
     }
     
 }
