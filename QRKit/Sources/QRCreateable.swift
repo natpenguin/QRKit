@@ -12,6 +12,22 @@ public protocol QRCreateable {
     var data: Data? { get }
 }
 
+extension String: QRCreateable {
+    
+    public var data: Data? {
+        return data(using: .utf8)
+    }
+    
+}
+
+extension Data: QRCreateable {
+    
+    public var data: Data? {
+        return self
+    }
+    
+}
+
 public struct QRCreateContext {
     
     // MARK: - interface
@@ -81,20 +97,4 @@ public struct QRCreateContext {
     private var size: CGSize = .init(width: 256, height: 256)
     private var renderer: QRRenderer = .software
     private var correction: QRCorrection = .h
-}
-
-extension String: QRCreateable {
-    
-    public var data: Data? {
-        return data(using: .utf8)
-    }
-    
-}
-
-extension Data: QRCreateable {
-    
-    public var data: Data? {
-        return self
-    }
-    
 }

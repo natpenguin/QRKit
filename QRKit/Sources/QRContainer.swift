@@ -8,22 +8,6 @@
 
 import UIKit
 
-public protocol QRKit {
-    associatedtype T
-    var qr: T { get }
-}
-
-extension QRKit {
-    
-    public var qr: QRContainer<Self> {
-        return QRContainer(raw: self)
-    }
-    
-}
-
-extension Data: QRKit {}
-extension String: QRKit {}
-
 public struct QRContainer<T> {
     
     // MARK: - lifecycle
@@ -43,6 +27,15 @@ extension QRContainer where T: QRCreateable {
     public var creator: QRCreateContext? {
         guard let data = raw.data else { return nil }
         return QRCreateContext(raw: data)
+    }
+    
+}
+
+extension QRContainer where T: QRDetectable {
+    
+    public var detector: QRDetectContext? {
+        guard let image = raw.image else { return nil }
+        return QRDetectContext(raw: image)
     }
     
 }
