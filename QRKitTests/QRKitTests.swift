@@ -21,7 +21,7 @@ class QRKitTests: XCTestCase {
     
     func testQuickResponse() {
         let string = "https://www.natpenguin.com/"
-        let image = string.qrcreator?.correction(.h).size(CGSize(width: 150, height: 150)).renderer(.software).image
+        let image = string.qr.creator?.correction(.h).size(CGSize(width: 150, height: 150)).renderer(.software).image()
         let strings = image?.qrdetector?.accurary(.high).strings
         XCTAssert(strings?.contains(string) ?? false, "Contain string.")
     }
