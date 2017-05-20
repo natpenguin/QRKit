@@ -25,7 +25,7 @@ public struct QRDetectContext {
     // MARK: - interface
     
     /// Create instance of `String` array.
-    public var strings: [String]? {
+    public func strings() -> [String]? {
         let options = [
             CIDetectorAccuracy : accuracy.rawValue
         ]
