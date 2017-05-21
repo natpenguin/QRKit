@@ -66,4 +66,20 @@ extension QRContainer where T == UIImageView {
         }
     }
     
+    public func set(of creator: QRCreateContext, completion handler: ((Bool) -> Void)? = nil) {
+        DispatchQueue.global(qos: .default).async {
+            if let image = creator.image() {
+                DispatchQueue.main.async {
+                    self.raw.image = image
+                    handler?(true)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.raw.image = nil
+                    handler?(false)
+                }
+            }
+        }
+    }
+    
 }
