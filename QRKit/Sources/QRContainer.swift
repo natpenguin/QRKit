@@ -49,7 +49,7 @@ extension QRContainer where T == UIImage {
 
 extension QRContainer where T == UIImageView {
     
-    func set(of string: String, completion handler: ((Bool) -> Void)? = nil) {
+    public func set(of string: String, completion handler: ((Bool) -> Void)? = nil) {
         DispatchQueue.global(qos: .default).async {
             let creator = string.qr.creator
             if let image = creator?.image() {
