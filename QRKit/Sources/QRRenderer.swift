@@ -12,7 +12,7 @@ import Foundation
 ///
 /// - software: Software rendering
 /// - hardware: Hardware rendering
-enum QRRenderer {
+public enum QRRenderer {
     case software
     case hardware
 }

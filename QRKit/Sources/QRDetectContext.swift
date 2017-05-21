@@ -36,7 +36,7 @@ public struct QRDetectContext {
     /// Initialize by specifying `CIImage` instance.
     ///
     /// - Parameter image: Image data.
-    internal init(raw: UIImage) {
+    public init(raw: UIImage) {
         self.raw = raw
     }
     

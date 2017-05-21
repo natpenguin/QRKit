@@ -16,7 +16,7 @@ public struct QRCreateContext {
     ///
     /// - Parameter size: Image size.
     /// - Returns: `QRCreator` instance.
-    func size(_ size: CGSize) -> QRCreateContext {
+    public func size(_ size: CGSize) -> QRCreateContext {
         var context = self
         context.size = size
         return context
@@ -26,7 +26,7 @@ public struct QRCreateContext {
     ///
     /// - Parameter renderer: Rendering environment
     /// - Returns: `QRCreator` instance
-    func renderer(_ renderer: QRRenderer) -> QRCreateContext {
+    public func renderer(_ renderer: QRRenderer) -> QRCreateContext {
         var context = self
         context.renderer = renderer
         return context
@@ -36,13 +36,13 @@ public struct QRCreateContext {
     ///
     /// - Parameter correction: Correction level.
     /// - Returns: `QRCreator` instance.
-    func correction(_ correction: QRCorrection) -> QRCreateContext {
+    public func correction(_ correction: QRCorrection) -> QRCreateContext {
         var context = self
         context.correction = correction
         return context
     }
     
-    func image() -> UIImage? {
+    public func image() -> UIImage? {
         let parameters: [String : Any] = [
             "inputMessage" : raw,
             "inputCorrectionLevel" : correction.rawValue
@@ -66,7 +66,7 @@ public struct QRCreateContext {
     
     // MARK: - lifecycle
     
-    init(raw: Data) {
+    public init(raw: Data) {
         self.raw = raw
     }
     

@@ -14,7 +14,7 @@ import Foundation
 /// - q: 25%
 /// - m: 15%
 /// - l: 07%
-enum QRCorrection: String {
+public enum QRCorrection: String {
     case h = "H"
     case q = "Q"
     case m = "M"
