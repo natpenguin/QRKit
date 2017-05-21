@@ -18,7 +18,7 @@ public struct QRContainer<T> {
     
     // MARK: - fileprivate
     
-    fileprivate let raw: T
+    let raw: T
     
 }
 
@@ -43,6 +43,27 @@ extension QRContainer where T == UIImage {
     
     public var detector: QRDetectContext? {
         return QRDetectContext(raw: raw)
+    }
+    
+}
+
+extension QRContainer where T == UIImageView {
+    
+    func set(of string: String, completion handler: ((Bool) -> Void)? = nil) {
+        DispatchQueue.global(qos: .default).async {
+            let creator = string.qr.creator
+            if let image = creator?.image() {
+                DispatchQueue.main.async {
+                    self.raw.image = image
+                    handler?(true)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.raw.image = nil
+                    handler?(false)
+                }
+            }
+        }
     }
     
 }

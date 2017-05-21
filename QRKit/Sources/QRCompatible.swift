@@ -24,3 +24,4 @@ extension QRCompatible {
 extension Data: QRCompatible {}
 extension String: QRCompatible {}
 extension UIImage: QRCompatible {}
+extension UIImageView: QRCompatible {}
