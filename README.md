@@ -11,14 +11,14 @@ QRKit is a library that create and detect QR code on iOS.
 - Rendering environment: `software`
 ```
 let string: String = // Any character string
-let image = string.qrcreator?.correction(.h).size(CGSize(width: 150, height: 150)).renderer(.software).image
+let image = string.qr.creator?.correction(.h).size(CGSize(width: 150, height: 150)).renderer(.software).image
 ```
 
 ## Detect
 - Recognition accuracy: `high`
 ```
 let image: UIImage = // Image containing QR code
-let strings = image.qrdetector?.accurary(.high).strings
+let strings = image.qr.detector?.accurary(.high).strings
 ```
 
 ## Requirements
