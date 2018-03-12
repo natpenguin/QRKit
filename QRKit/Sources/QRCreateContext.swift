@@ -41,7 +41,27 @@ public struct QRCreateContext {
         context.correction = correction
         return context
     }
-    
+
+    /// Specify the foreground color.
+    ///
+    /// - Parameter color: foreground color.
+    /// - Returns: `QRCreator` instance.
+    public func foregroungColor(_ color: UIColor) -> QRCreateContext {
+        var context = self
+        context.foregroungColor = color
+        return context
+    }
+
+    /// Specify the background color.
+    ///
+    /// - Parameter color: background color.
+    /// - Returns: `QRCreator` instance.
+    public func backgroungColor(_ color: UIColor) -> QRCreateContext {
+        var context = self
+        context.backgroungColor = color
+        return context
+    }
+
     public func image() -> UIImage? {
         let parameters: [String : Any] = [
             "inputMessage" : raw,
@@ -50,8 +70,16 @@ public struct QRCreateContext {
         guard let filter = CIFilter(name: "CIQRCodeGenerator", withInputParameters: parameters) else { return nil }
         filter.setDefaults()
         
-        guard let generatedImage = filter.outputImage else { return nil }
-        
+        var outputImage = filter.outputImage
+        if let image = outputImage {
+            outputImage = CIFilter(name: "CIFalseColor", withInputParameters: [
+                "inputImage": image,
+                "inputColor0": CIColor(cgColor: foregroungColor.cgColor),
+                "inputColor1": CIColor(cgColor: backgroungColor.cgColor)
+            ])?.value(forKey: "outputImage") as? CIImage
+        }
+        guard let generatedImage = outputImage else { return nil }
+
         let scale = CGPoint(
             x: size.width / generatedImage.extent.width,
             y: size.height / generatedImage.extent.height
@@ -77,6 +105,8 @@ public struct QRCreateContext {
     private var size: CGSize = .init(width: 256, height: 256)
     private var renderer: QRRenderer = .software
     private var correction: QRCorrection = .h
+    private var foregroungColor: UIColor = UIColor.black
+    private var backgroungColor: UIColor = UIColor.white
 }
 
 
