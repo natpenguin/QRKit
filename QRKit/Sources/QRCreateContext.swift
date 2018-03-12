@@ -79,7 +79,7 @@ public struct QRCreateContext {
             "inputColor1": CIColor(color: backgroundColor)
         ]
         guard let colorFilter = CIFilter(name: "CIFalseColor", withInputParameters: colorParameters) else { return nil }
-        guard let generatedImage = colorFilter.value(forKey: "outputImage") as? CIImage else { return nil }
+        guard let generatedImage = colorFilter.outputImage else { return nil }
 
         // scaling
         let scale = CGPoint(
