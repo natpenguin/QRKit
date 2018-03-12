@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0EC31E1A20564E4900FFC044 /* QRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 147563D71E3149CB00D04460 /* QRKit.framework */; };
 		144E45581ED07D5100AC5D7C /* QRAccuracy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E45571ED07D5100AC5D7C /* QRAccuracy.swift */; };
 		144E455A1ED07FAD00AC5D7C /* QRCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E45591ED07FAD00AC5D7C /* QRCompatible.swift */; };
 		144E455C1ED0888900AC5D7C /* QRCreateContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E455B1ED0888900AC5D7C /* QRCreateContext.swift */; };
@@ -46,18 +47,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EC31E1A20564E4900FFC044 /* QRKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0EC31E1920564E4900FFC044 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		147563CB1E3149B200D04460 = {
 			isa = PBXGroup;
 			children = (
 				147563D91E3149CB00D04460 /* QRKit */,
 				14D69D021E32E21100215BDD /* QRKitTests */,
 				147563D81E3149CB00D04460 /* Products */,
+				0EC31E1920564E4900FFC044 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
