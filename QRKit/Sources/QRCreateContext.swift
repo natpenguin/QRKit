@@ -107,8 +107,8 @@ public struct QRCreateContext {
     private var size: CGSize = .init(width: 256, height: 256)
     private var renderer: QRRenderer = .software
     private var correction: QRCorrection = .h
-    private var foregroundColor = UIColor.black
-    private var backgroundColor = UIColor.white
+    private var foregroundColor: UIColor = .black
+    private var backgroundColor: UIColor = .white
 }
 
 
