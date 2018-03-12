@@ -46,9 +46,9 @@ public struct QRCreateContext {
     ///
     /// - Parameter color: foreground color.
     /// - Returns: `QRCreator` instance.
-    public func foregroungColor(_ color: UIColor) -> QRCreateContext {
+    public func foregroundColor(_ color: UIColor) -> QRCreateContext {
         var context = self
-        context.foregroungColor = color
+        context.foregroundColor = color
         return context
     }
 
@@ -56,9 +56,9 @@ public struct QRCreateContext {
     ///
     /// - Parameter color: background color.
     /// - Returns: `QRCreator` instance.
-    public func backgroungColor(_ color: UIColor) -> QRCreateContext {
+    public func backgroundColor(_ color: UIColor) -> QRCreateContext {
         var context = self
-        context.backgroungColor = color
+        context.backgroundColor = color
         return context
     }
 
@@ -74,8 +74,8 @@ public struct QRCreateContext {
         if let image = outputImage {
             outputImage = CIFilter(name: "CIFalseColor", withInputParameters: [
                 "inputImage": image,
-                "inputColor0": CIColor(cgColor: foregroungColor.cgColor),
-                "inputColor1": CIColor(cgColor: backgroungColor.cgColor)
+                "inputColor0": CIColor(cgColor: foregroundColor.cgColor),
+                "inputColor1": CIColor(cgColor: backgroundColor.cgColor)
             ])?.value(forKey: "outputImage") as? CIImage
         }
         guard let generatedImage = outputImage else { return nil }
@@ -105,8 +105,8 @@ public struct QRCreateContext {
     private var size: CGSize = .init(width: 256, height: 256)
     private var renderer: QRRenderer = .software
     private var correction: QRCorrection = .h
-    private var foregroungColor: UIColor = UIColor.black
-    private var backgroungColor: UIColor = UIColor.white
+    private var foregroundColor: UIColor = UIColor.black
+    private var backgroundColor: UIColor = UIColor.white
 }
 
 
