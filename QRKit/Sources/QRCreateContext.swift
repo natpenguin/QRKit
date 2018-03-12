@@ -41,17 +41,47 @@ public struct QRCreateContext {
         context.correction = correction
         return context
     }
-    
+
+    /// Specify the foreground color.
+    ///
+    /// - Parameter color: foreground color.
+    /// - Returns: `QRCreator` instance.
+    public func foregroundColor(_ color: UIColor) -> QRCreateContext {
+        var context = self
+        context.foregroundColor = color
+        return context
+    }
+
+    /// Specify the background color.
+    ///
+    /// - Parameter color: background color.
+    /// - Returns: `QRCreator` instance.
+    public func backgroundColor(_ color: UIColor) -> QRCreateContext {
+        var context = self
+        context.backgroundColor = color
+        return context
+    }
+
     public func image() -> UIImage? {
-        let parameters: [String : Any] = [
+        // generate qr code
+        let qrParameters: [String : Any] = [
             "inputMessage" : raw,
             "inputCorrectionLevel" : correction.rawValue
         ]
-        guard let filter = CIFilter(name: "CIQRCodeGenerator", withInputParameters: parameters) else { return nil }
-        filter.setDefaults()
-        
-        guard let generatedImage = filter.outputImage else { return nil }
-        
+        guard let qrFilter = CIFilter(name: "CIQRCodeGenerator", withInputParameters: qrParameters) else { return nil }
+        qrFilter.setDefaults()
+        guard let qrImage = qrFilter.outputImage else { return nil }
+
+        // apply colors
+        let colorParameters = [
+            "inputImage": qrImage,
+            "inputColor0": CIColor(color: foregroundColor),
+            "inputColor1": CIColor(color: backgroundColor)
+        ]
+        guard let colorFilter = CIFilter(name: "CIFalseColor", withInputParameters: colorParameters) else { return nil }
+        guard let generatedImage = colorFilter.outputImage else { return nil }
+
+        // scaling
         let scale = CGPoint(
             x: size.width / generatedImage.extent.width,
             y: size.height / generatedImage.extent.height
@@ -77,6 +107,8 @@ public struct QRCreateContext {
     private var size: CGSize = .init(width: 256, height: 256)
     private var renderer: QRRenderer = .software
     private var correction: QRCorrection = .h
+    private var foregroundColor: UIColor = .black
+    private var backgroundColor: UIColor = .white
 }
 
 
